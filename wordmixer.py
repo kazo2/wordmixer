@@ -3,6 +3,7 @@ import subprocess
 
 
 def clipboardcopy(txt):
+	"""Copies text to the keyboard"""
 	cmd = 'echo ' + txt.strip() + '|clip'
 	return subprocess.check_call(cmd, shell=True)
 
@@ -13,6 +14,7 @@ def main():
 	wordslist = words.split(' ')
 
 	def randomizer(words, string):
+		"""Randomizes words"""
 		for i in range(len(words)):
 			try:
 				prevj = j
