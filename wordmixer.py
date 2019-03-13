@@ -10,6 +10,7 @@ def clipboardcopy(txt):
 
 def main():
 	words = input()
+	# Add spaces to parantheses so they are counted as words too and thus randomized
 	words = words.replace("(", "( ").replace(")", ") ")
 	wordslist = words.split(' ')
 
@@ -17,41 +18,54 @@ def main():
 		"""Randomizes words"""
 		for i in range(len(words)):
 			try:
-				prevj = j
+				prevj = j  # The previous word
 			except:
 				pass
 			j = words[randint(0, len(words) - 1)]
 			if i:
 				try:
+					# Setting up grammar rules and such
 					if j.isupper():
-						string += f" {j}"
+						# If the string is all uppercase we leave it as such
+						string += f" {j}" 
 					elif prevj.endswith((".", "?", "!")):
+						# If the previous word ended with an end of statement
+						# symbol then we will capitalize the first letter
+						# of this word
 						string += f" {j.title()}"
 
-					elif prevj in ["(", ")"] and j.isupper():
+					elif prevj == "(" and j.isupper():
+						# If the word is uppercase and there were parantheses
+						# we leave it uppercase and don't add a space
 						string += j
-					elif prevj in ["(", ")"]:
+					elif prevj == "(":
+						# If there were parantheses we do not add a space
+						# to avoid doing ( this )
 						string += j.lower()
 
 					else:
+						# Just a normal word in a sentence.
 						string += f" {j.lower()}"
 				except:
 					if j.isupper():
+						# If the word is uppercase we keep it that way
 						string += f" {j}"
 					else:
+						# A normal word
 						string += f" {j.lower()}"
 			else:
-				if j != j.upper():
-					string += j.title()
-				else:
+				if j.isupper():
+					# If its uppercase we do not capitalize it.
 					string += j
+				else:
+					# First word will be capitalized.
+					string += j.title()
+			# Delete it to narrow down the words we've already pulled
 			del (words[words.index(j)])
-		if len(words) > 1 and string.lower() == str(words.lower()):
-			randomizer(words, "")
-		print(string)
-		clipboardcopy(string)
-	randomizer(wordslist, "")
-	main()
+		print(string)  # Prints the string in console
+		clipboardcopy(string)  # and copies it to the clipboard
+	randomizer(wordslist, "")  # Runs the randomizer
+	main()  # Loops the program once the input has been randomized.
 
 
 if __name__ == "__main__":
