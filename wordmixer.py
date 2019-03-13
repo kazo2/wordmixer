@@ -10,7 +10,7 @@ def clipboardcopy(txt):
 
 def main():
 	words = input()
-	# Add spaces to parantheses so they are counted as words too and thus randomized
+	# Add spaces to parentheses so they are counted as words too and thus randomized
 	words = words.replace("(", "( ").replace(")", ") ")
 	wordslist = words.split(' ')
 
@@ -35,11 +35,11 @@ def main():
 						string += f" {j.title()}"
 
 					elif prevj == "(" and j.isupper():
-						# If the word is uppercase and there were parantheses
+						# If the word is uppercase and there were parentheses
 						# we leave it uppercase and don't add a space
 						string += j
 					elif prevj == "(":
-						# If there were parantheses we do not add a space
+						# If there were parentheses we do not add a space
 						# to avoid doing ( this )
 						string += j.lower()
 
